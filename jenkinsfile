@@ -11,7 +11,7 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                bat 'kubectl config curretnt-context'
+                bat 'kubectl config current-context'
                 bat 'kubectl config view --minify'
                 bat 'kubectl cluster-info'
             }
