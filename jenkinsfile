@@ -11,8 +11,9 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                bat 'kubectl apply -f k8s/ -n secure-app'
-                bat 'kubectl apply -f security/ -n secure-app'
+                bat 'kubectl using curretnt-context'
+                bat 'kubectl config view --minify'
+                bat 'kubectl cluster-info'
             }
         }
 
