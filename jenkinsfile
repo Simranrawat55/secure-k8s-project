@@ -3,13 +3,6 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                git branch: 'main',
-                    url: 'YOUR_GITHUB_REPOSITORY_URL'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 bat 'docker build -t secure-k8s-app:latest .'
