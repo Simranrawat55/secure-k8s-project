@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: secure-k8s-app
+  namespace: secure-app
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: secure-k8s-app
+
+  template:
+    metadata:
+      labels:
+        app: secure-k8s-app
+
+    spec:
+      serviceAccountName: secure-app-sa
+
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+
+      containers:
+        - name: secure-k8s-app
+
+          image: secure-k8s-app:1.0
+          imagePullPolicy: Never
+
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+
+          env:
+            - name: APP_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: secure-app-secret
+                  key: APP_SECRET
+
+          envFrom:
+            - configMapRef:
+                name: secure-app-config
+
+          ports:
+            - containerPort: 5000
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
