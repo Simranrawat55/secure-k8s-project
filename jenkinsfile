@@ -5,7 +5,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t secure-k8s-app:latest .'
+                bat 'docker build -t secure-k8s-app:latest ./app'
             }
         }
 
