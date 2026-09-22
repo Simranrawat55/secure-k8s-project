@@ -52,5 +52,8 @@ Please check the Jenkins Console Output.
                 to: "simranrwt2122@gmail.com"
             )
         }
+        always {
+            echo "email notification step completed."
+        }
     }
 }
