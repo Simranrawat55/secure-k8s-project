@@ -23,31 +23,34 @@ pipeline {
             }
         }
     }
-post {
-    success {
-        emailext(
-            subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-            body: """Build successful!
+
+    post {
+        success {
+            emailext(
+                subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """Build completed successfully.
 
 Job: ${env.JOB_NAME}
 Build: #${env.BUILD_NUMBER}
-URL: ${env.BUILD_URL}
+Jenkins URL: ${env.BUILD_URL}
 """,
-            to: "simranrwt2122@gmail.com"
-        )
-    }
+                to: "simranrwt2122@gmail.com"
+            )
+        }
 
-    failure {
-        emailext(
-            subject: "FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-            body: """Build failed!
+        failure {
+            emailext(
+                subject: "FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """Build failed.
 
 Job: ${env.JOB_NAME}
 Build: #${env.BUILD_NUMBER}
-URL: ${env.BUILD_URL}
+Jenkins URL: ${env.BUILD_URL}
+
+Please check the Jenkins Console Output.
 """,
-            to: "simranrwt2122@gmail.com"
-        )
+                to: "simranrwt2122@gmail.com"
+            )
+        }
     }
-  }
 }
