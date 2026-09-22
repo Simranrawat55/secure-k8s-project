@@ -56,4 +56,3 @@ Please check the Jenkins Console Output.
             echo "email notification step completed."
         }
     }
-}
