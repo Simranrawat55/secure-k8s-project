@@ -25,35 +25,30 @@ pipeline {
     }
 
     post {
-        success {
-            emailext(
-                subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: """Build completed successfully.
+    success {
+        mail(
+            to: 'simranrawat34912@gmail.com',
+            subject: "JENKINS SUCCESS - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: """Build completed successfully.
 
 Job: ${env.JOB_NAME}
 Build: #${env.BUILD_NUMBER}
 Jenkins URL: ${env.BUILD_URL}
-""",
-                to: "simranrawat34912@gmail.com"
-            )
-        }
-
-        failure {
-            emailext(
-                subject: "FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: """Build failed.
-
-Job: ${env.JOB_NAME}
-Build: #${env.BUILD_NUMBER}
-Jenkins URL: ${env.BUILD_URL}
-
-Please check the Jenkins Console Output.
-""",
-                to: "simranrawat34912@gmail.com"
-            )
-        }
-        always {
-            echo "email notification step completed."
-        }
+"""
+        )
     }
+
+    failure {
+        mail(
+            to: 'simranrawat34912@gmail.com',
+            subject: "JENKINS FAILED - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: """Build failed.
+
+Job: ${env.JOB_NAME}
+Build: #${env.BUILD_NUMBER}
+Jenkins URL: ${env.BUILD_URL}
+"""
+        )
+    }
+ }
 }
