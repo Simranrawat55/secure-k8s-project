@@ -34,7 +34,7 @@ Job: ${env.JOB_NAME}
 Build: #${env.BUILD_NUMBER}
 Jenkins URL: ${env.BUILD_URL}
 """,
-                to: "simranrwt2122@gmail.com"
+                to: "simranrawat34912@gmail.com"
             )
         }
 
@@ -49,7 +49,7 @@ Jenkins URL: ${env.BUILD_URL}
 
 Please check the Jenkins Console Output.
 """,
-                to: "simranrwt2122@gmail.com"
+                to: "simranrawat34912@gmail.com"
             )
         }
         always {
